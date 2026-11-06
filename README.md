@@ -28,10 +28,10 @@ The script sends the same prompt to both models one at a time, and saves the res
 
 Both models were pretty slow generating responses. We occasionally experienced timeouts, especially with Qwen3:4b.
 
-The order in which the models were executed seemed to affect the performance. Running a model requires a huge amount of RAM, running one model first seems to affect the available memory the the second model.
+The order in which the models were executed seemed to affect the performance. Running a model requires a huge amount of RAM, running one model first seems to affect the available memory of the second model.
 
-The responses was much less accurate than those from larger commerical language models like OpenAIs GPT models or Anthropics Claude models.
+The responses were much less accurate than those from larger commerical language models like OpenAIs GPT models or Anthropics Claude models.
 
-Both models was able to answer simple questions correctly, like "what is the capital of Sweden" or common riddles. However they sometimes hallucinated answers. For example, Gemma 3:4b answered "This is a classic riddle The answer is a table" to the trick question "What has two legs but cannot drive a motorcycle?". The models also tended to give really long answers even to simple questions.
+Both models were able to answer simple questions correctly, like "What is the capital of Sweden?" or common riddles. However they sometimes hallucinated answers. For example, Gemma 3:4b answered "This is a classic riddle, the answer is a table" to the trick question "What has two legs but cannot drive a motorcycle?". When asked another nonsensical riddle - "What gets wetter the more it loafy loafy?", Gemma 3:4b confidently answered "a sponge" and tried to explain the meaning of the ridddle. Qwen3:4b, although considerably slower, identified the original riddle correctly and answered "a towel". It also suggested that the user had misspelled the riddle. The models tended to give long answers even to simple questions. 
 
 To summarize, the models performed OK on simple questions but was not reliable when handling unusual prompts.
