@@ -59,10 +59,16 @@ To summarize, the models performed OK on simple questions but was not reliable w
 
 ### Assignment 2
 
-We ran the tests several times, starting with using Gemma3:4b. The results was almost identical each time. Some small details in the wording sometimes changed, but the main information was the same. The model consistenly answered "Canberra" when asked what Australia's capital is.
+We decided to set the passing threshold to 100% since the questions and prompts in our test suite was really simple, and it felt safe to assume that the model would answer them correctly.
+
+We ran the tests several times, starting with using Gemma3:4b. The results was almost identical each time. Some small details in the wording sometimes changed, but the main information was the same. The model consistently answered "Canberra" when asked what Australia's capital is.
 
 We also ran the tests with Qwen3:4b. Both models gave the correct answer "Canberra" and passed all six tests in our test suite. But with Qwen the answers were different than the Gemma-tests. Gemma gave shorter answers while Qwen gave much longer explainations, like historical information about Canberra. Qwens answers was also a bit **too** detailed and some information was misleading, for example in one test it stated:
 `"Canberra is a **shared capital city** for the Australian Capital Territory (ACT) and New South Wales."`. While Canberra is the capital of ACT, the correct answer for the state of New South Wales is **Sydney**.
 
-With Qwen we also noticed a lot more variation, especially in wording, between runs. We believe that since the answers were much longer and contained more details, the changes were more noticeable.
+With Qwen we also noticed a lot more variation, especially in wording, between runs. We believe that since the answers were much longer and contained more details, the changes were more noticeable. This is an example of non-determinism in LLMs (the same model can generate different responses even though the prompt is the same, due to the fact that models pick a next token from a list of likely options).
 Longer answers also made it more difficult to evaluate if the facts were correct or not.
+
+We also tried running the tests with Qwen3:4b generating the answer and Gemma3:4b acting as the judge and vice versa. Both combinations passed all the tests and both judges deemed the answers to be correct. Again, Qwen3:4b gave longer and more detailed answers with a lot of information that was not fully fact-checked by the LLM-as-a-judge. To see if we could improve this we extended the llm_as_a_judge_agrees() prompt to check all factual claims. The llm_as_a_judge_agrees() was placed inside the loop with a separate if statement, to automatically check the generated answers. Interestingly, even so, when Qwen3:4b provided misleading historical information, Gemma3:4b accepted the answer as correct.
+
+Sometimes an LLM timed out instead of giving an answer, which caused the test to fail. Another potential problem that may come up is that the Python code may accept a wrong answer as correct, if the word "Canberra" is mentioned for any reason. Thus, a failed or passed test does not always reveal if the AI has answered correctly or not. Human oversight, for instance by reviewing the generated answers as well as the verdicts using print statements, may sometimes be necessary to understand why a test failed.
