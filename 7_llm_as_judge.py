@@ -23,7 +23,7 @@ def llm_as_a_judge_agrees(country, answer, expected):
               f"Given answer: {answer}\n\n"
               f"Does the given answer agree with the expected answer? "
               f"Extra details are fine as long as they do not contradict it. Reply with only YES or NO.")
-    verdict = chat_ollama("qwen3:4b", prompt, verbose=False)['message']['content']
+    verdict = chat_ollama("gemma3:4b", prompt, verbose=False)['message']['content']
     return verdict.strip().upper().startswith("YES")
 
 
@@ -45,7 +45,7 @@ class TestApp(unittest.TestCase):
             answer = ask_capital("Sweden")
             if "Stockholm" in answer:
                 correct += 1
-        self.assertGreaterEqual(correct, 2)
+        self.assertGreaterEqual(correct, 3)
 
     # CONSISTENCY TEST FOR AUSTRALIA
     def test_knows_capital_of_australia(self):
@@ -55,7 +55,7 @@ class TestApp(unittest.TestCase):
             print("Australia answer:", answer)
             if "Canberra" in answer:
                 correct += 1
-        self.assertGreaterEqual(correct, 2)
+        self.assertGreaterEqual(correct, 3)
 
     # LLM AS JUDGE
     def test_judge_accepts_right_capital(self):
