@@ -16,9 +16,9 @@ The purpose of this repository is to experiment with local LLMs using Ollama, th
 We created a python script that sends the same prompt to two different models and saves their responses in a CSV-file.
 
 ### Assignment 2
-We added new consistency tests for Australia to see if the model would correctly identify Canberra at the capital.
-The test asks the model three times and requires at least two correct answers.
-We also added a test to check if the LLM judge accepts Canberra as the correct answer.
+We added new consistency tests to see if the model would correctly identify Canberra at the capital of Australia.
+The test asks the model three times and requires the model to answer all of them correct.
+We also added a test to check if the LLM-as-a-judge accepts Canberra as the correct answer.
 
 ## 🚀 How To Run
 
