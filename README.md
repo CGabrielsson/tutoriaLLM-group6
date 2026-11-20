@@ -16,7 +16,7 @@ The purpose of this repository is to experiment with local LLMs using Ollama, th
 We created a python script that sends the same prompt to two different models and saves their responses in a CSV-file.
 
 ### Assignment 2
-We added new consistency tests to see if the model would correctly identify Canberra at the capital of Australia.
+We added new consistency tests to see if the model would correctly identify Canberra as the capital of Australia.
 The test asks the model three times and requires the model to answer all of them correct.
 We also added a test to check if the LLM-as-a-judge accepts Canberra as the correct answer.
 
@@ -60,6 +60,7 @@ To summarize, the models performed OK on simple questions but was not reliable w
 ### Assignment 2
 
 We decided to set the passing threshold to 100% since the questions and prompts in our test suite was really simple, and it felt safe to assume that the model would answer them correctly.
+Each consistency test asks the same question three times, and all three responses must contain the expected capital for the test to pass. The entire test suite is considered successful only if all six tests pass.
 
 We ran the tests several times, starting with using Gemma3:4b. The results was almost identical each time. Some small details in the wording sometimes changed, but the main information was the same. The model consistently answered "Canberra" when asked what Australia's capital is.
 
